@@ -1,0 +1,25 @@
+{
+  "_id": "41824f1f-c561-4b45-b31e-30ce44d979a7",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "integrationId": "risks-involved-9836",
+  "intentClassification": {
+    "modelId": "4cf651d9-edf3-455f-a22e-53cc67fcc07b"
+  },
+  "name": "Risks Involved",
+  "primaryWorkflowId": "f308bdbf-47d6-4537-a90a-0fc1626b40f8",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "scope": "It makes user awake about the risks involved in the document.",
+  "status": "Active",
+  "intents": [
+    {
+      "_id": "bba2b948-9ddb-4f8b-bca2-be08cfb5170c",
+      "name": "Risk Analyzer",
+      "description": "It analyzes risk in the document",
+      "examples": [
+        "Is this risky?"
+      ],
+      "workflowId": "ed159edd-3015-432a-a84e-bae5c014bd89",
+      "flowType": "Workflow"
+    }
+  ]
+}

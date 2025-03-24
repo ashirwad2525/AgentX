@@ -1,0 +1,25 @@
+{
+  "_id": "efbdb23c-d5cd-4975-b2ce-60d1176ff8d4",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "integrationId": "future-asistance-3639",
+  "intentClassification": {
+    "modelId": "4cf651d9-edf3-455f-a22e-53cc67fcc07b"
+  },
+  "name": "Future Asistance",
+  "primaryWorkflowId": "365e736a-5e5a-4336-99a2-ed5891697f46",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "scope": "It gives future assitance to the user regarding the document.",
+  "status": "Active",
+  "intents": [
+    {
+      "_id": "05299f44-1458-4630-b4ab-a3a6acb6f2d2",
+      "name": "Future Implications",
+      "description": "It gives future scope for the document.",
+      "examples": [
+        "What are future implications for this document?"
+      ],
+      "workflowId": "41591ba4-eac6-4807-aa52-4b84084aecb0",
+      "flowType": "Workflow"
+    }
+  ]
+}

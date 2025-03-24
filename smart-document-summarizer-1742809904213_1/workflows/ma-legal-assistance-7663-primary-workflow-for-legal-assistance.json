@@ -1,0 +1,289 @@
+{
+  "_id": "9d70fe89-0fbd-443f-87f5-faf4ee4bd8e4",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "integrationId": "ma-legal-assistance-7663-primary-workflow-for-legal-assistance",
+  "isMiniAgentPrimaryWorkflow": true,
+  "name": "Primary Workflow for Legal Assistance",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "startTaskId": "f4a955d0-c0b7-4300-a5d9-d4a35e22c15e",
+  "status": "Active",
+  "tasks": [
+    {
+      "_id": "f4a955d0-c0b7-4300-a5d9-d4a35e22c15e",
+      "type": "PassThrough",
+      "config": {
+        "name": "Pass Through",
+        "description": "Pass through the input to the output"
+      },
+      "transitions": [
+        {
+          "_id": "978b3788-3bee-4f2d-bbc3-48503e5aea05-f4a955d0-c0b7-4300-a5d9-d4a35e22c15e",
+          "nextTask": "978b3788-3bee-4f2d-bbc3-48503e5aea05",
+          "name": "If query doesnt exists",
+          "rules": [
+            {
+              "type": "any",
+              "operator": "notExists",
+              "path": "$output.query"
+            }
+          ]
+        },
+        {
+          "_id": "2e690e93-4ad2-42e2-b75c-75358a6176a7-f4a955d0-c0b7-4300-a5d9-d4a35e22c15e",
+          "nextTask": "2e690e93-4ad2-42e2-b75c-75358a6176a7",
+          "name": "If intents are already classified",
+          "rules": [
+            {
+              "type": "any",
+              "operator": "exists",
+              "path": "$output.intents"
+            },
+            {
+              "type": "any",
+              "operator": "exists",
+              "path": "$output.query"
+            }
+          ]
+        },
+        {
+          "_id": "f4a955d0-c0b7-4300-a5d9-d4a35e22c15e-513f55cd-a85f-4779-8753-51501614a670",
+          "name": "If query exists",
+          "nextTask": "513f55cd-a85f-4779-8753-51501614a670",
+          "rules": [
+            {
+              "type": "any",
+              "operator": "exists",
+              "path": "$output.query"
+            },
+            {
+              "type": "any",
+              "operator": "notExists",
+              "path": "$output.intents"
+            }
+          ]
+        }
+      ],
+      "globalVariables": [
+        {
+          "name": "query",
+          "referencePath": "$input.query"
+        },
+        {
+          "name": "conversationId",
+          "referencePath": "$input.conversationId"
+        }
+      ]
+    },
+    {
+      "_id": "978b3788-3bee-4f2d-bbc3-48503e5aea05",
+      "type": "Input",
+      "config": {
+        "name": "User Input",
+        "description": "Get user input",
+        "type": "string"
+      },
+      "transitions": [
+        {
+          "_id": "978b3788-3bee-4f2d-bbc3-48503e5aea05-513f55cd-a85f-4779-8753-51501614a670",
+          "name": "Default",
+          "nextTask": "513f55cd-a85f-4779-8753-51501614a670"
+        }
+      ],
+      "globalVariables": [
+        {
+          "name": "query",
+          "referencePath": "$output.userInput"
+        },
+        {
+          "name": "selfLoopMiniAgent",
+          "referencePath": "true"
+        }
+      ]
+    },
+    {
+      "_id": "513f55cd-a85f-4779-8753-51501614a670",
+      "type": "Loader",
+      "config": {
+        "name": "Loader",
+        "description": "Display loader message",
+        "type": "loader",
+        "text": "Just a moment... identifying the best approach to assist you."
+      },
+      "transitions": [
+        {
+          "_id": "513f55cd-a85f-4779-8753-51501614a670-521778d2-62de-4566-a859-b7bd91b9605f",
+          "name": "Default",
+          "nextTask": "521778d2-62de-4566-a859-b7bd91b9605f"
+        }
+      ]
+    },
+    {
+      "_id": "521778d2-62de-4566-a859-b7bd91b9605f",
+      "type": "IntentClassification",
+      "config": {
+        "name": "Intent Classification",
+        "description": "Classify the intent of the user message",
+        "modelId": "4cf651d9-edf3-455f-a22e-53cc67fcc07b",
+        "intents": [
+          {
+            "name": "Legal Assistance",
+            "description": "Gives the user Legal assitance needed",
+            "examples": [
+              "What are legalities in this?"
+            ]
+          }
+        ],
+        "query": "$agent.query"
+      },
+      "transitions": [
+        {
+          "_id": "521778d2-62de-4566-a859-b7bd91b9605f-2e690e93-4ad2-42e2-b75c-75358a6176a7",
+          "name": "If Intent is Matched",
+          "rules": [
+            {
+              "type": "string",
+              "operator": "equal",
+              "path": "$output.intentMatched",
+              "value": "true"
+            }
+          ],
+          "nextTask": "2e690e93-4ad2-42e2-b75c-75358a6176a7"
+        },
+        {
+          "_id": "521778d2-62de-4566-a859-b7bd91b9605f-a2e3b3c7-afd5-4f76-bd38-b0233ea31a90",
+          "name": "If No Intent is Matched",
+          "rules": [
+            {
+              "type": "string",
+              "operator": "equal",
+              "path": "$output.intentMatched",
+              "value": "false"
+            }
+          ],
+          "nextTask": "a2e3b3c7-afd5-4f76-bd38-b0233ea31a90"
+        }
+      ]
+    },
+    {
+      "_id": "2e690e93-4ad2-42e2-b75c-75358a6176a7",
+      "type": "JSFunction",
+      "config": {
+        "name": "JS Function",
+        "description": "Execute JS function",
+        "code": "\nconst main = () => {\n    const currentExecutionId = _id;\n    const intents = agent?.icIntents?.[currentExecutionId] || input.intents;\n    const currentIndex = agent?.icLoopIndexes?.[currentExecutionId] || 0;\n    const currentIntent = intents[currentIndex] || {};\n    const { intent, task } = currentIntent;\n    const state = currentIndex === intents.length ? 'end' : 'continue'\n    const icLoopIndexes = { ...(agent?.icLoopIndexes || {}), [_id]: state === 'end' ? undefined : currentIndex + 1 };\n    const icIntents = { ...(agent?.icIntents || {}), [_id]: state === 'end' ? undefined : intents };\n    return { ...input, intent, state: currentIndex === intents.length ? 'end' : 'continue', icLoopIndexes, icIntents, query: task };\n};\n\nmain()\n"
+      },
+      "globalVariables": [
+        {
+          "referencePath": "$output.icLoopIndexes",
+          "name": "icLoopIndexes"
+        },
+        {
+          "referencePath": "$output.icIntents",
+          "name": "icIntents"
+        }
+      ],
+      "transitions": [
+        {
+          "_id": "2e690e93-4ad2-42e2-b75c-75358a6176a7-ec06d311-481c-49b8-b330-04f47c970584",
+          "name": "If Intent is Matched",
+          "rules": [
+            {
+              "type": "string",
+              "operator": "equal",
+              "path": "$output.intent",
+              "value": "Legal Assistance"
+            }
+          ],
+          "nextTask": "ec06d311-481c-49b8-b330-04f47c970584"
+        },
+        {
+          "_id": "2e690e93-4ad2-42e2-b75c-75358a6176a7-978b3788-3bee-4f2d-bbc3-48503e5aea05",
+          "name": "If Self Loop",
+          "rules": [
+            {
+              "type": "string",
+              "operator": "equal",
+              "path": "$agent.selfLoopMiniAgent",
+              "value": "true"
+            },
+            {
+              "type": "string",
+              "operator": "equal",
+              "path": "$output.state",
+              "value": "end"
+            }
+          ],
+          "nextTask": "978b3788-3bee-4f2d-bbc3-48503e5aea05"
+        }
+      ]
+    },
+    {
+      "_id": "ec06d311-481c-49b8-b330-04f47c970584",
+      "type": "Workflow",
+      "config": {
+        "name": "Intent - Legal Assistance",
+        "description": "Workflow for intent - Legal Assistance",
+        "workflowId": "057c5b3d-a716-49c9-88d4-3bdbdeb618dd"
+      },
+      "transitions": [
+        {
+          "_id": "ec06d311-481c-49b8-b330-04f47c970584-2e690e93-4ad2-42e2-b75c-75358a6176a7",
+          "name": "Mini agent execution completed",
+          "nextTask": "2e690e93-4ad2-42e2-b75c-75358a6176a7"
+        }
+      ]
+    },
+    {
+      "_id": "a2e3b3c7-afd5-4f76-bd38-b0233ea31a90",
+      "transitions": [
+        {
+          "_id": "a2e3b3c7-afd5-4f76-bd38-b0233ea31a90-978b3788-3bee-4f2d-bbc3-48503e5aea05",
+          "name": "If Self Loop",
+          "rules": [
+            {
+              "type": "string",
+              "operator": "equal",
+              "path": "$agent.selfLoopMiniAgent",
+              "value": "true"
+            }
+          ],
+          "nextTask": "978b3788-3bee-4f2d-bbc3-48503e5aea05"
+        }
+      ],
+      "type": "Output",
+      "config": {
+        "name": "Output",
+        "description": "Output the response to the user",
+        "type": "external",
+        "text": "Unable to complete task $agent.query"
+      }
+    },
+    {
+      "_id": "4971b7c4-9be2-4dc4-9c93-a2524b373467",
+      "transitions": [
+        {
+          "_id": "4971b7c4-9be2-4dc4-9c93-a2524b373467-978b3788-3bee-4f2d-bbc3-48503e5aea05",
+          "name": "If Self Loop",
+          "rules": [
+            {
+              "type": "string",
+              "operator": "equal",
+              "path": "$agent.selfLoopMiniAgent",
+              "value": "true"
+            }
+          ],
+          "nextTask": "978b3788-3bee-4f2d-bbc3-48503e5aea05"
+        }
+      ],
+      "type": "Display",
+      "config": {
+        "name": "Display",
+        "description": "Display the response to the user",
+        "type": "text",
+        "text": "$input.content"
+      }
+    }
+  ],
+  "type": "Conversational",
+  "version": "latest"
+}

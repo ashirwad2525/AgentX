@@ -1,0 +1,24 @@
+{
+  "_id": "a8788461-b33d-436c-9fbe-c99ebc59be40",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "integrationId": "document-verification-6192-1742809905606",
+  "name": "Workflow for Document Verification",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "startTaskId": "dfb35352-fc2e-4824-9c89-e487c767c881",
+  "status": "Active",
+  "tasks": [
+    {
+      "_id": "dfb35352-fc2e-4824-9c89-e487c767c881",
+      "transitions": [],
+      "type": "Display",
+      "config": {
+        "name": "Display",
+        "description": "Display the response to the user",
+        "type": "text",
+        "text": "Hi there! Intent $input.intent has been matched"
+      }
+    }
+  ],
+  "type": "Conversational",
+  "version": "latest"
+}

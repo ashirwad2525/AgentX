@@ -1,0 +1,559 @@
+{
+  "_id": "6e1c33dc-9afb-44de-b41a-ee81a2a134c7",
+  "name": "Workflow for Data Extraction Copy 1742810303910",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "integrationId": "workflow-for-data-extraction-copy-1742810303910",
+  "status": "Active",
+  "version": "latest",
+  "type": "Conversational",
+  "tasks": [
+    {
+      "_id": "1739963857660",
+      "type": "Prompt",
+      "config": {
+        "description": "Prompt for LLM",
+        "name": "Prompt",
+        "modelId": "gpt-4o-mini",
+        "systemPrompt": "You are an advanced language model designed to generate clear, concise, and accurate summaries. When summarizing a document, focus on extracting key points while maintaining the original meaning. Ensure the summary is well-structured, easy to understand, and free from unnecessary details. Avoid adding interpretations or opinions—stick to the core information presented in the document.",
+        "base64DocumentData": "",
+        "documentIds": "$agent.promptFilesTarget",
+        "responseFormat": "text",
+        "query": "Summarize the document in a crystal-clear manner, capturing its key points concisely and accurately. Ensure the summary is well-structured, easy to understand, and retains the document's essential meaning without unnecessary details. This is the specific user query -  $agent.query",
+        "temperature": 1,
+        "numOfConversationTurns": 2
+      },
+      "transitions": [
+        {
+          "name": "Default",
+          "_id": "1739963857660-1739966609252",
+          "nextTask": "1739966609252"
+        }
+      ]
+    },
+    {
+      "_id": "1739964052224",
+      "type": "DocumentUpload",
+      "config": {
+        "description": "Upload document",
+        "name": "Upload Document ",
+        "uploadTo": "conversation",
+        "uploadMethod": "UserInput",
+        "supportedFileTypes": [
+          "pdf",
+          "png",
+          "jpg",
+          "jpeg",
+          "webp"
+        ]
+      },
+      "transitions": [
+        {
+          "name": "Default",
+          "_id": "xy-edge__17399640522241739964052224-source-1-17400512148451740051214845-target-1",
+          "nextTask": "1740051214845"
+        }
+      ],
+      "globalVariables": [
+        {
+          "name": "metainfo",
+          "referencePath": "$output.documentId"
+        },
+        {
+          "name": "metainfo",
+          "referencePath": "$output.metainfo"
+        }
+      ]
+    },
+    {
+      "_id": "1739964267212",
+      "type": "JSFunction",
+      "config": {
+        "description": "Execute JavaScript code",
+        "name": "JavaScript",
+        "snippetId": "3cf4eca2-0091-4553-b457-6b276949d3be"
+      },
+      "transitions": [
+        {
+          "name": "pdf",
+          "clause": "And",
+          "rules": [
+            {
+              "type": "string",
+              "path": "$agent.ext",
+              "operator": "equal",
+              "value": "pdf"
+            }
+          ],
+          "_id": "xy-edge__17399642672121739964267212-source-1-17399659562181739965956218-target-1",
+          "nextTask": "1739965956218"
+        },
+        {
+          "name": "Default",
+          "_id": "1739964267212-1739966172392",
+          "nextTask": "1739966172392"
+        }
+      ],
+      "globalVariables": [
+        {
+          "name": "fileName",
+          "referencePath": "$output.fileName"
+        },
+        {
+          "name": "ext",
+          "referencePath": "$output.ext"
+        }
+      ]
+    },
+    {
+      "_id": "1739965956218",
+      "type": "DocumentToImage",
+      "config": {
+        "description": "Convert document to Images",
+        "name": "Document To Image",
+        "documentId": "$agent.documentId"
+      },
+      "transitions": [
+        {
+          "name": "Default",
+          "_id": "1739965956218-1739965965890",
+          "nextTask": "1739965965890"
+        }
+      ]
+    },
+    {
+      "_id": "1739965965890",
+      "type": "JSFunction",
+      "config": {
+        "description": "Execute JavaScript code",
+        "name": "JavaScript (1)",
+        "snippetId": "9ccb6106-5ab4-4ca2-84ed-77a5c78fa91f"
+      },
+      "transitions": [
+        {
+          "name": "Default",
+          "_id": "xy-edge__17399659658901739965965890-source-1-17400512369651740051236965-target-1",
+          "nextTask": "1740051236965"
+        }
+      ],
+      "globalVariables": [
+        {
+          "name": "promptFilesTarget",
+          "referencePath": "$output.docIdString"
+        }
+      ]
+    },
+    {
+      "_id": "1739966172392",
+      "type": "PassThrough",
+      "config": {
+        "description": "Pass through data",
+        "name": "Pass Through"
+      },
+      "transitions": [
+        {
+          "name": "Default",
+          "_id": "xy-edge__17399661723921739966172392-source-1-17400512369651740051236965-target-1",
+          "nextTask": "1740051236965"
+        }
+      ],
+      "globalVariables": [
+        {
+          "name": "promptFilesTarget",
+          "referencePath": "$agent.documentId"
+        }
+      ]
+    },
+    {
+      "_id": "1739966609252",
+      "type": "Display",
+      "config": {
+        "description": "Show data",
+        "name": "Display",
+        "formatVariables": [],
+        "type": "text",
+        "text": "<p><span class=\"text-inherit p-0 m-0 text-primary-dark bg-primary-light/80\" data-type=\"mention\" data-id=\"input.content\">$input.content</span> </p>"
+      },
+      "transitions": []
+    },
+    {
+      "_id": "1740051214845",
+      "type": "Loader",
+      "config": {
+        "description": "Show loading messages in conversation",
+        "name": "Loader",
+        "text": "Extracting Data"
+      },
+      "transitions": [
+        {
+          "name": "Default",
+          "_id": "1740051214845-1739964267212",
+          "nextTask": "1739964267212"
+        }
+      ]
+    },
+    {
+      "_id": "1740051236965",
+      "type": "Loader",
+      "config": {
+        "description": "Show loading messages in conversation",
+        "name": "Loader",
+        "text": "Generating Summary"
+      },
+      "transitions": [
+        {
+          "name": "Default",
+          "_id": "1740051236965-1739963857660",
+          "nextTask": "1739963857660"
+        }
+      ]
+    },
+    {
+      "_id": "1740051428116",
+      "type": "Display",
+      "config": {
+        "description": "Show data",
+        "name": "Display",
+        "formatVariables": [],
+        "type": "text",
+        "text": "<p><strong>Welcome!</strong> 👋</p><p>I am your <strong>Document Summary Generation Agent</strong> 📝. I can quickly analyze and summarize your documents, extracting key points, important details, and insights in a concise format. Whether it's a research paper, report, legal document, or any lengthy text, I’ll provide you with a clear and easy-to-understand summary.</p><p><strong>How It Works:</strong></p><ol><li><p><strong>Upload your document</strong> 📄 in the chatbox.</p></li><li><p>I will process the content and generate a structured summary for you.</p></li><li><p>If needed, I can refine the summary based on your preferences.</p></li></ol><p>Go ahead and upload your document now! 🚀</p>"
+      },
+      "transitions": [
+        {
+          "name": "Default",
+          "_id": "1740051428116-1739964052224",
+          "nextTask": "1739964052224"
+        }
+      ]
+    }
+  ],
+  "reactflow": {
+    "viewport": {
+      "x": 136.50927548378093,
+      "y": 91.43526205538862,
+      "zoom": 0.5
+    },
+    "nodes": [
+      {
+        "id": "0",
+        "type": "Start",
+        "position": {
+          "x": -575.1305705719371,
+          "y": 328
+        },
+        "data": {},
+        "deletable": false,
+        "measured": {
+          "width": 320,
+          "height": 190
+        },
+        "selected": false
+      },
+      {
+        "position": {
+          "x": 2890,
+          "y": 400
+        },
+        "type": "Prompt",
+        "id": "1739963857660",
+        "data": {},
+        "measured": {
+          "width": 260,
+          "height": 78
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "position": {
+          "x": 823.1291344522594,
+          "y": 357.66273438187363
+        },
+        "type": "DocumentUpload",
+        "id": "1739964052224",
+        "data": {},
+        "measured": {
+          "width": 260,
+          "height": 78
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "position": {
+          "x": 1672,
+          "y": 450
+        },
+        "type": "JSFunction",
+        "id": "1739964267212",
+        "data": {},
+        "measured": {
+          "width": 260,
+          "height": 78
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "position": {
+          "x": 2025,
+          "y": 165
+        },
+        "type": "DocumentToImage",
+        "id": "1739965956218",
+        "data": {},
+        "measured": {
+          "width": 277,
+          "height": 78
+        },
+        "selected": false
+      },
+      {
+        "position": {
+          "x": 2398,
+          "y": 165
+        },
+        "type": "JSFunction",
+        "id": "1739965965890",
+        "data": {},
+        "measured": {
+          "width": 260,
+          "height": 78
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "position": {
+          "x": 2235,
+          "y": 420
+        },
+        "type": "PassThrough",
+        "id": "1739966172392",
+        "data": {},
+        "measured": {
+          "width": 260,
+          "height": 78
+        },
+        "selected": false
+      },
+      {
+        "position": {
+          "x": 3348.7430572526764,
+          "y": 400
+        },
+        "type": "Display",
+        "id": "1739966609252",
+        "data": {},
+        "measured": {
+          "width": 260,
+          "height": 78
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "position": {
+          "x": 1166.204633401431,
+          "y": 220.88754469337573
+        },
+        "type": "Loader",
+        "id": "1740051214845",
+        "data": {},
+        "measured": {
+          "width": 320,
+          "height": 78
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "position": {
+          "x": 2859.622422493853,
+          "y": 103.97188617334393
+        },
+        "type": "Loader",
+        "id": "1740051236965",
+        "data": {},
+        "measured": {
+          "width": 320,
+          "height": 78
+        },
+        "selected": false,
+        "dragging": false
+      },
+      {
+        "position": {
+          "x": 154.8957241455749,
+          "y": 357.66273438187363
+        },
+        "type": "Display",
+        "id": "1740051428116",
+        "data": {},
+        "measured": {
+          "width": 260,
+          "height": 78
+        },
+        "selected": false,
+        "dragging": false
+      }
+    ],
+    "edges": [
+      {
+        "id": "xy-edge__00-source-1-17400514281161740051428116-target-1",
+        "type": "Start",
+        "source": "0",
+        "target": "1740051428116",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "sourceHandle": "0-source-1",
+        "targetHandle": "1740051428116-target-1",
+        "selected": false
+      },
+      {
+        "type": "Transition",
+        "id": "1739963857660-1739966609252",
+        "source": "1739963857660",
+        "target": "1739966609252",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "sourceHandle": "1739963857660-source-1",
+        "targetHandle": "1739966609252-target-1",
+        "selected": false
+      },
+      {
+        "type": "Transition",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "source": "1739964052224",
+        "target": "1740051214845",
+        "sourceHandle": "1739964052224-source-1",
+        "targetHandle": "1740051214845-target-1",
+        "selected": false,
+        "id": "xy-edge__17399640522241739964052224-source-1-17400512148451740051214845-target-1"
+      },
+      {
+        "type": "Transition",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "source": "1739964267212",
+        "target": "1739965956218",
+        "sourceHandle": "1739964267212-source-1",
+        "targetHandle": "1739965956218-target-1",
+        "selected": false,
+        "id": "xy-edge__17399642672121739964267212-source-1-17399659562181739965956218-target-1"
+      },
+      {
+        "type": "Transition",
+        "id": "1739964267212-1739966172392",
+        "source": "1739964267212",
+        "target": "1739966172392",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "sourceHandle": "1739964267212-source-1",
+        "targetHandle": "1739966172392-target-1",
+        "selected": false
+      },
+      {
+        "type": "Transition",
+        "id": "1739965956218-1739965965890",
+        "source": "1739965956218",
+        "target": "1739965965890",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "sourceHandle": "1739965956218-source-1",
+        "targetHandle": "1739965965890-target-1",
+        "selected": false
+      },
+      {
+        "type": "Transition",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "source": "1739965965890",
+        "target": "1740051236965",
+        "sourceHandle": "1739965965890-source-1",
+        "targetHandle": "1740051236965-target-1",
+        "selected": false,
+        "id": "xy-edge__17399659658901739965965890-source-1-17400512369651740051236965-target-1"
+      },
+      {
+        "type": "Transition",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "source": "1739966172392",
+        "target": "1740051236965",
+        "sourceHandle": "1739966172392-source-1",
+        "targetHandle": "1740051236965-target-1",
+        "selected": false,
+        "id": "xy-edge__17399661723921739966172392-source-1-17400512369651740051236965-target-1"
+      },
+      {
+        "type": "Transition",
+        "id": "1740051214845-1739964267212",
+        "source": "1740051214845",
+        "target": "1739964267212",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "sourceHandle": "1740051214845-source-1",
+        "targetHandle": "1739964267212-target-1",
+        "selected": false
+      },
+      {
+        "type": "Transition",
+        "id": "1740051236965-1739963857660",
+        "source": "1740051236965",
+        "target": "1739963857660",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "sourceHandle": "1740051236965-source-3",
+        "targetHandle": "1739963857660-target-2",
+        "selected": false
+      },
+      {
+        "type": "Transition",
+        "id": "1740051428116-1739964052224",
+        "source": "1740051428116",
+        "target": "1739964052224",
+        "markerEnd": {
+          "type": "arrowclosed",
+          "width": 22,
+          "height": 22
+        },
+        "sourceHandle": "1740051428116-source-1",
+        "targetHandle": "1739964052224-target-1",
+        "selected": false
+      }
+    ]
+  },
+  "startTaskId": "1740051428116",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1"
+}

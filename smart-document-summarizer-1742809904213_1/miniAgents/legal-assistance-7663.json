@@ -1,0 +1,25 @@
+{
+  "_id": "69d2366e-1c31-4bf7-a99e-eba8349e7281",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "integrationId": "legal-assistance-7663",
+  "intentClassification": {
+    "modelId": "4cf651d9-edf3-455f-a22e-53cc67fcc07b"
+  },
+  "name": "Legal Assistance",
+  "primaryWorkflowId": "9d70fe89-0fbd-443f-87f5-faf4ee4bd8e4",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "scope": "Assists the user about legal issues",
+  "status": "Active",
+  "intents": [
+    {
+      "_id": "3dee393c-5be7-4fe6-ba12-b7aeb0d1a062",
+      "name": "Legal Assistance",
+      "description": "Gives the user Legal assitance needed",
+      "examples": [
+        "What are legalities in this?"
+      ],
+      "workflowId": "057c5b3d-a716-49c9-88d4-3bdbdeb618dd",
+      "flowType": "Workflow"
+    }
+  ]
+}

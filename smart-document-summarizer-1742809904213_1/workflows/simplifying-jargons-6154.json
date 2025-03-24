@@ -1,0 +1,24 @@
+{
+  "_id": "1c4689b8-9514-4bc9-8a8e-b4e68551b8f9",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "integrationId": "simplifying-jargons-6154",
+  "name": "Workflow for Simplifying Jargons",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "startTaskId": "a34118cf-4289-4dbd-99f2-1465d3a780ca",
+  "status": "Active",
+  "tasks": [
+    {
+      "_id": "a34118cf-4289-4dbd-99f2-1465d3a780ca",
+      "transitions": [],
+      "type": "Display",
+      "config": {
+        "name": "Display",
+        "description": "Display the response to the user",
+        "type": "text",
+        "text": "Hi there! Intent $input.intent has been matched"
+      }
+    }
+  ],
+  "type": "Conversational",
+  "version": "latest"
+}

@@ -1,0 +1,109 @@
+{
+  "aiPersonaIntegrationId": "smart-document-summarizer-1742809904213",
+  "version": "1.0.0",
+  "description": "AI Agent smart-document-summarizer-1742809904213 package version 1.0.0",
+  "data": {
+    "workflows": [
+      [
+        "workflows",
+        "data-extraction-6192-1742809905606.json"
+      ],
+      [
+        "workflows",
+        "ma-kyc-document-processing-5807-primary-workflow-for-kyc-document-processing-1742809905606.json"
+      ],
+      [
+        "workflows",
+        "simplifying-jargons-6154.json"
+      ],
+      [
+        "workflows",
+        "ma-jargons-simplifier-4603-primary-workflow-for-jargons-simplifier.json"
+      ],
+      [
+        "workflows",
+        "legal-assistance-2358.json"
+      ],
+      [
+        "workflows",
+        "ma-legal-assistance-7663-primary-workflow-for-legal-assistance.json"
+      ],
+      [
+        "workflows",
+        "risk-analyzer-1299.json"
+      ],
+      [
+        "workflows",
+        "ma-risks-involved-9836-primary-workflow-for-risks-involved.json"
+      ],
+      [
+        "workflows",
+        "future-implications-0378.json"
+      ],
+      [
+        "workflows",
+        "ma-future-asistance-3639-primary-workflow-for-future-asistance.json"
+      ],
+      [
+        "workflows",
+        "workflow-for-data-extraction-copy-1742810303910.json"
+      ],
+      [
+        "workflows",
+        "document-verification-6192-1742809905606.json"
+      ],
+      [
+        "workflows",
+        "compliance-check-6192-1742809905606.json"
+      ]
+    ],
+    "models": [
+      [
+        "models",
+        "gpt-4o-mini.json"
+      ],
+      [
+        "models",
+        "azure-gpt-4o-mini.json"
+      ]
+    ],
+    "snippets": [
+      [
+        "snippets",
+        "Upload doc helper-1742809905606.json"
+      ],
+      [
+        "snippets",
+        "Get PDF Images-1742809905606.json"
+      ]
+    ],
+    "miniAgents": [
+      [
+        "miniAgents",
+        "kyc-document-processing-5807-1742809905606.json"
+      ],
+      [
+        "miniAgents",
+        "jargons-simplifier-4603.json"
+      ],
+      [
+        "miniAgents",
+        "legal-assistance-7663.json"
+      ],
+      [
+        "miniAgents",
+        "risks-involved-9836.json"
+      ],
+      [
+        "miniAgents",
+        "future-asistance-3639.json"
+      ]
+    ],
+    "aiPersonas": [
+      [
+        "aiPersonas",
+        "smart-document-summarizer-1742809904213.json"
+      ]
+    ]
+  }
+}

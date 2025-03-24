@@ -1,0 +1,25 @@
+{
+  "_id": "3c324152-9875-4e19-8fcb-98aaf2429371",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "integrationId": "jargons-simplifier-4603",
+  "intentClassification": {
+    "modelId": "4cf651d9-edf3-455f-a22e-53cc67fcc07b"
+  },
+  "name": "Jargons Simplifier",
+  "primaryWorkflowId": "e73ae881-f3d0-4936-81e6-956acbbf9949",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "scope": "Analyze the jargons in document and give a simpler version.",
+  "status": "Active",
+  "intents": [
+    {
+      "_id": "792cc3bf-c018-4084-9f85-9a3c6afa959d",
+      "name": "Simplifying Jargons",
+      "description": "Take jargons from the document",
+      "examples": [
+        "What this means?"
+      ],
+      "workflowId": "1c4689b8-9514-4bc9-8a8e-b4e68551b8f9",
+      "flowType": "Workflow"
+    }
+  ]
+}

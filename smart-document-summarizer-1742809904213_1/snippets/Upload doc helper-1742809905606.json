@@ -1,0 +1,7 @@
+{
+  "_id": "3cf4eca2-0091-4553-b457-6b276949d3be",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "code": "const main = () => {\n    const fileName = agent?.metainfo?.name || '';\n    const parts = fileName.split('.')\n    const name = parts.slice(0, -1).join('.')\n    const ext = parts.at(-1)\n    return { name, ext: ext?.toLowerCase() }\n\n};\n\nmain()\n",
+  "name": "Upload doc helper-1742809905606",
+  "status": "Active"
+}

@@ -1,0 +1,24 @@
+{
+  "_id": "ed159edd-3015-432a-a84e-bae5c014bd89",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "integrationId": "risk-analyzer-1299",
+  "name": "Workflow for Risk Analyzer",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "startTaskId": "bf5d0394-93a3-416a-8fc9-34a2cf8213c9",
+  "status": "Active",
+  "tasks": [
+    {
+      "_id": "bf5d0394-93a3-416a-8fc9-34a2cf8213c9",
+      "transitions": [],
+      "type": "Display",
+      "config": {
+        "name": "Display",
+        "description": "Display the response to the user",
+        "type": "text",
+        "text": "Hi there! Intent $input.intent has been matched"
+      }
+    }
+  ],
+  "type": "Conversational",
+  "version": "latest"
+}

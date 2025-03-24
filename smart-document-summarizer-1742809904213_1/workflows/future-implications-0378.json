@@ -1,0 +1,24 @@
+{
+  "_id": "41591ba4-eac6-4807-aa52-4b84084aecb0",
+  "aiPersonaId": "55882aef-9e6e-439b-9b6c-e3b8d14552d1",
+  "integrationId": "future-implications-0378",
+  "name": "Workflow for Future Implications",
+  "publisherAccountId": "aff2c253-3c7e-4f91-9944-d5a4cfb81256",
+  "startTaskId": "87f2be2f-7501-4581-822c-999f5ab83ccb",
+  "status": "Active",
+  "tasks": [
+    {
+      "_id": "87f2be2f-7501-4581-822c-999f5ab83ccb",
+      "transitions": [],
+      "type": "Display",
+      "config": {
+        "name": "Display",
+        "description": "Display the response to the user",
+        "type": "text",
+        "text": "Hi there! Intent $input.intent has been matched"
+      }
+    }
+  ],
+  "type": "Conversational",
+  "version": "latest"
+}
